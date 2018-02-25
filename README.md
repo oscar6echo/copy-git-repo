@@ -79,3 +79,9 @@ destination folder will be created
 make copy
 done
 ```
+
+## 4 - Credits
+
+The [Click](http://click.pocoo.org/6/) Python package to create CLI interfaces is really flexible and convenient.  
+Highly recommended !
+
