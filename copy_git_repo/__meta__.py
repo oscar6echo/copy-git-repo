@@ -2,7 +2,7 @@
 __name__ = 'copy_git_repo'
 name_url = __name__.replace('_', '-')
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __description__ = 'Copy repo excluding files mentionned in .gitignore'
 __long_description__ = 'See repo README'
 __author__ = 'oscar6echo'
