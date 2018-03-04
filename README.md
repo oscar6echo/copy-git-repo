@@ -19,6 +19,9 @@ But it may convenient to keep just the source code synced.
 
 This small package helps copy all folders and files not matched by the .gitignore file from one directory to another.  
 
+WARNING:
++ Only top level .igitignore is taken into account.
++ node_modules/ folders at any level are ignored.
 
 ## 2 - Installation
 
