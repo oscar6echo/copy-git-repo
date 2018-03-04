@@ -83,7 +83,6 @@ def remove_empty_folders(path):
         
         try:
             delete_folder(_path)
-            print(_path)
         except OSError as e:
             print('error :', e)
 
@@ -106,15 +105,17 @@ def delete_folder(drc):
 def build_ignore_function(src, incl_git=False):
 
     path = os.path.join(src, '.gitignore')
-    with open(path, 'r') as f:
-        # .gitignore lines
-        spec_src = [e.rstrip() for e in f.readlines()]
-        
-        # .git folder
-        if not incl_git:
-            spec_src.append('.git/*')
+    spec_src = []
+    if os.path.isfile(path):
+        with open(path, 'r') as f:
+            # .gitignore lines
+            spec_src = [e.rstrip() for e in f.readlines()]
+            
+            # .git folder
+            if not incl_git:
+                spec_src.append('.git/*')
 
-        spec = pathspec.PathSpec.from_lines('gitwildmatch', spec_src)
+    spec = pathspec.PathSpec.from_lines('gitwildmatch', spec_src)
 
     # data to recompose path relative to source
     abs_src = os.path.abspath(src)
@@ -133,8 +134,11 @@ def build_ignore_function(src, incl_git=False):
             path = abs_f[len_abs_src:]
             return path
 
-        ignored_files = [f for f in files
-                         if spec.match_file(path_rel_src(f))]
+        if os.path.basename(curr_dir) == 'node_modules':
+            ignored_files = files
+        else:
+            ignored_files = [f for f in files
+                            if spec.match_file(path_rel_src(f))]
 
         return ignored_files
 
